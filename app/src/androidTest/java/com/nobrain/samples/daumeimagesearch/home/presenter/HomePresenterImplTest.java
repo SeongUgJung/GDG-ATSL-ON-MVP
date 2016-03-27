@@ -14,11 +14,13 @@ import org.junit.runner.RunWith;
 import rx.Subscription;
 import rx.observers.TestSubscriber;
 
+import static com.jayway.awaitility.Awaitility.await;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
@@ -83,7 +85,16 @@ public class HomePresenterImplTest {
 
     @Test
     public void testLoadSearchResult() throws Exception {
+        final boolean[] finish = {false};
+        doAnswer(invocationOnMock -> {
+            finish[0] = true;
+            return invocationOnMock;
+        }).when(mockView).refresh();
+
         homePresenter.loadSearchResult("coupang");
+
+        await().until(() -> finish[0]);
+
         verify(mockAdapterDataModel, atLeast(1)).add(any());
         verify(mockView, times(1)).refresh();
     }
