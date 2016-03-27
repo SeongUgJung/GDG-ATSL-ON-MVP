@@ -24,8 +24,8 @@ public class HomePresenterImpl implements HomePresenter {
     private SearchApi searchApi;
     private ImageAdapterDataModel imageAdapterDataModel;
 
-    private PublishSubject<String> searchSubject;
-    private Subscription searchSubscription;
+    PublishSubject<String> searchSubject;
+    Subscription searchSubscription;
     private int pageCount = 1;
 
     @Inject
@@ -44,17 +44,21 @@ public class HomePresenterImpl implements HomePresenter {
                 .throttleWithTimeout(200, TimeUnit.MILLISECONDS)
                 .observeOn(Schedulers.io())
                 .subscribe(text -> {
-                    searchApi.searchText(text, pageCount)
-                            .filter(channel -> channel != null && channel.getChannel() != null)
-                            .map(SearchChannel::getChannel)
-                            .filter(result -> result != null && result.getResult() > 0)
-                            .flatMap(imageResult -> Observable.from(imageResult.getItem()))
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(imageAdapterDataModel::add,
-                                    Throwable::printStackTrace,
-                                    view::refresh);
+                    loadSearchResult(text);
 
                 }, Throwable::printStackTrace);
+    }
+
+    void loadSearchResult(String text) {
+        searchApi.searchText(text, pageCount)
+                .filter(channel -> channel != null && channel.getChannel() != null)
+                .map(SearchChannel::getChannel)
+                .filter(result -> result != null && result.getResult() > 0)
+                .flatMap(imageResult -> Observable.from(imageResult.getItem()))
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(imageAdapterDataModel::add,
+                        Throwable::printStackTrace,
+                        view::refresh);
     }
 
     @Override
