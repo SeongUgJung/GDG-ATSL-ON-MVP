@@ -1,0 +1,74 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.nobrain.samples.daumeimagesearch"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        debug {
+            buildConfigField "String", "DAUM_API_KEY", "\"${daum_api_key}\""
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions.excludes = [
+            'META-INF/DEPENDENCIES',
+            'META-INF/LICENSE',
+            'META-INF/LICENSE.txt',
+            'LICENSE.txt',
+            'LICENSE',
+            'META-INF/license.txt',
+            'META-INF/NOTICE',
+            'NOTICE',
+            'asm-license.txt',
+            'META-INF/NOTICE.txt',
+            'META-INF/notice.txt',
+            'META-INF/ASL2.0'
+    ]
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Support Library
+    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
+
+    // Bean DI
+    apt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    compile "com.google.dagger:dagger:${daggerVersion}"
+    provided 'javax.annotation:jsr250-api:1.0'
+
+    // View DI
+    compile "com.jakewharton:butterknife:${butterKnifeVersion}"
+
+    // Http
+    compile "com.squareup.retrofit2:retrofit:${retrofit2Version}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofit2Version}"
+    compile "com.squareup.retrofit2:adapter-rxjava:${retrofit2Version}"
+
+    // RxAndroid, RxJava
+    compile "io.reactivex:rxandroid:${rxAndroidVersion}"
+    compile "io.reactivex:rxjava:${rxJavaVersion}"
+
+    // Image Loader
+    compile "com.github.bumptech.glide:glide:${glideVersion}"
+
+}

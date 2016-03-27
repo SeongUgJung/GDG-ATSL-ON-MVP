@@ -1,0 +1,40 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+ext {
+    supportLibraryVersion = '23.2.1'
+    retrofit2Version = '2.0.0'
+    rxAndroidVersion = '1.1.0'
+    rxJavaVersion = '1.1.2'
+    glideVersion = '3.7.0'
+    daggerVersion = '2.1'
+    butterKnifeVersion = '7.0.1'
+}
+
+def checkDaumApi() {
+    if (!project.hasProperty('daum_api_key')) {
+        throw new IllegalArgumentException('Put Daum Api Key from https://developers.daum.net/\nPut into {root}/gradle.properties >> daum_api_key=xxx')
+    }
+}
+
+checkDaumApi()
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
