@@ -9,7 +9,7 @@ public class RetrofitCreator {
     public static Retrofit createRetrofit() {
 
         return new Retrofit.Builder()
-                .baseUrl("")
+                .baseUrl("https://apis.daum.net/search/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
