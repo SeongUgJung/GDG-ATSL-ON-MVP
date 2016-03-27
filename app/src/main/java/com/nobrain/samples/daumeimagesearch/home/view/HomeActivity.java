@@ -1,5 +1,7 @@
 package com.nobrain.samples.daumeimagesearch.home.view;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -50,6 +52,10 @@ public class HomeActivity extends AppCompatActivity implements HomePresenter.Vie
 
         rvSearchResult.setAdapter(adapter);
         rvSearchResult.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
+
+        imageAdapterDataView.setOnRecyclerItemClickListener((adapter1, position) -> {
+            homePresenter.onItemClick(position);
+        });
     }
 
     @Override
@@ -66,5 +72,11 @@ public class HomeActivity extends AppCompatActivity implements HomePresenter.Vie
     @Override
     public void refresh() {
         imageAdapterDataView.refresh();
+    }
+
+    @Override
+    public void onMoveLink(String link) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
+        startActivity(intent);
     }
 }

@@ -2,6 +2,7 @@ package com.nobrain.samples.daumeimagesearch.home.presenter;
 
 import android.text.TextUtils;
 
+import com.nobrain.samples.daumeimagesearch.domain.search.ImageItem;
 import com.nobrain.samples.daumeimagesearch.domain.search.SearchChannel;
 import com.nobrain.samples.daumeimagesearch.home.adapter.ImageAdapterDataModel;
 import com.nobrain.samples.daumeimagesearch.network.SearchApi;
@@ -74,5 +75,12 @@ public class HomePresenterImpl implements HomePresenter {
     @Override
     public void unSubscribeSearch() {
         searchSubscription.unsubscribe();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        ImageItem item = imageAdapterDataModel.getItem(position);
+        String link = item.getLink();
+        view.onMoveLink(link);
     }
 }

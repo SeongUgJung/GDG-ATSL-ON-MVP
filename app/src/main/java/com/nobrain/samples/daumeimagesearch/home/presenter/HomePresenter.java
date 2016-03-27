@@ -6,8 +6,12 @@ public interface HomePresenter {
 
     void unSubscribeSearch();
 
+    void onItemClick(int position);
+
     interface View {
 
         void refresh();
+
+        void onMoveLink(String link);
     }
 }
