@@ -8,6 +8,9 @@ ext {
     glideVersion = '3.7.0'
     daggerVersion = '2.1'
     butterKnifeVersion = '7.0.1'
+    dexmakerVersion = "1.4"
+    testRunnerVersion = "0.4.1"
+    espressoVersion = "2.2.1"
 }
 
 def checkDaumApi() {
