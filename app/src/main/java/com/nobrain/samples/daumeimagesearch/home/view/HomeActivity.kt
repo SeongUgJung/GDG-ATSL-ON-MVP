@@ -44,8 +44,10 @@ class HomeActivity : AppCompatActivity(), HomePresenter.View {
 
         ButterKnife.bind(this)
 
-        rvSearchResult.adapter = adapter
-        rvSearchResult.layoutManager = LinearLayoutManager(this@HomeActivity)
+        rvSearchResult.apply {
+            this.adapter = adapter
+            this.layoutManager = LinearLayoutManager(this@HomeActivity)
+        }
 
         imageAdapterDataView.setOnRecyclerItemClickListener(object : OnRecyclerItemClickListener {
             override fun onItemClick(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>, position: Int) {

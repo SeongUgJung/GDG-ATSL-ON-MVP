@@ -7,11 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitCreator {
 
     fun createRetrofit(): Retrofit {
-        return Retrofit.Builder()
-                .baseUrl("https://apis.daum.net/search/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .build()
+        return Retrofit.Builder().apply {
+            baseUrl("https://apis.daum.net/search/")
+            addConverterFactory(GsonConverterFactory.create())
+            addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+        }.build()
 
 
     }

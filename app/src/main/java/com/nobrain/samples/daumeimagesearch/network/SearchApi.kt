@@ -12,9 +12,7 @@ class SearchApi
 @Inject
 constructor(private val retrofit: Retrofit) {
 
-    fun searchText(text: String, pageCount: Int): Observable<SearchChannel> {
-        return retrofit.create(Api::class.java).getSearch(text, pageCount)
-    }
+    fun searchText(text: String, pageCount: Int) = retrofit.create(Api::class.java).getSearch(text, pageCount)
 
     internal interface Api {
         @GET("image?output=json&apikey=" + BuildConfig.DAUM_API_KEY)

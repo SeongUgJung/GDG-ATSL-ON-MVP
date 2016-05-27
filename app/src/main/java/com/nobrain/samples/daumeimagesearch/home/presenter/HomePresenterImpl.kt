@@ -43,7 +43,7 @@ constructor(// DI Object
                 .filter { channel -> channel != null && channel.channel != null }
                 .map<ImageResult>(Func1<SearchChannel, ImageResult> { it.channel })
                 .filter {
-                    it?.result?.let {
+                    it?.totalCount?.let {
                         it > 0
                     }
                 }

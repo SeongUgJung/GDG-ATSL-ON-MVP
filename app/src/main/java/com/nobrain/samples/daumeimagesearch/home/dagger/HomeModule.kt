@@ -14,23 +14,15 @@ import dagger.Provides
 class HomeModule(private val view: HomePresenter.View, private val adapter: ImageAdapter) {
 
     @Provides
-    internal fun provideImageAdapterDataModel(): ImageAdapterDataModel {
-        return adapter
-    }
+    internal fun provideImageAdapterDataModel(): ImageAdapterDataModel = adapter
 
     @Provides
-    internal fun provideImageAdapterDataView(): ImageAdapterDataView {
-        return adapter
-    }
+    internal fun provideImageAdapterDataView(): ImageAdapterDataView = adapter
 
     @Provides
-    internal fun provideHomePresenter(homePresenter: HomePresenterImpl): HomePresenter {
-        return homePresenter
-    }
+    internal fun provideHomePresenter(homePresenter: HomePresenterImpl): HomePresenter = homePresenter
 
     @Provides
-    internal fun provideView(): HomePresenter.View {
-        return view
-    }
+    internal fun provideView(): HomePresenter.View = view
 
 }

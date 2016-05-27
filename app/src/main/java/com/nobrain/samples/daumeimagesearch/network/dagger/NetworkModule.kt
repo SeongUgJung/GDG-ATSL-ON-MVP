@@ -11,12 +11,8 @@ import retrofit2.Retrofit
 class NetworkModule {
 
     @Provides
-    fun provideRetrofit(): Retrofit {
-        return RetrofitCreator.createRetrofit()
-    }
+    fun provideRetrofit(): Retrofit = RetrofitCreator.createRetrofit()
 
     @Provides
-    fun provideSearchApi(retrofit: Retrofit): SearchApi {
-        return SearchApi(retrofit)
-    }
+    fun provideSearchApi(retrofit: Retrofit) = SearchApi(retrofit)
 }

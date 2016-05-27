@@ -27,7 +27,6 @@ class ImageAdapter(private val context: Context) : RecyclerView.Adapter<ImageAda
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageAdapter.SearchViewHolder {
         return LayoutInflater.from(context).run {
             SearchViewHolder(inflate(R.layout.item_search_result, parent, false))
-
         }
     }
 
@@ -38,9 +37,7 @@ class ImageAdapter(private val context: Context) : RecyclerView.Adapter<ImageAda
         }
     }
 
-    override fun getItemCount(): Int {
-        return size
-    }
+    override fun getItemCount(): Int = size
 
     override fun add(imageItem: ImageItem) {
         items.add(imageItem)
@@ -49,9 +46,7 @@ class ImageAdapter(private val context: Context) : RecyclerView.Adapter<ImageAda
     override val size: Int
         get() = items.size
 
-    override fun getItem(position: Int): ImageItem {
-        return items[position]
-    }
+    override fun getItem(position: Int): ImageItem = items[position]
 
     override fun clear() {
         items.clear()
